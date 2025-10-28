@@ -14,7 +14,7 @@
   "onCreateCommand": [
     "bash",
     "-c",
-    "echo 'eval \"$(rbenv init - bash)\"' >> ~/.bashrc"
+    "echo 'eval \"$(rbenv init - bash)\"' >> ~/.bashrc && source ~/.bashrc"
   ],
   "waitFor": "postCreateCommand",
   "postCreateCommand": "bin/setup --skip-server",
