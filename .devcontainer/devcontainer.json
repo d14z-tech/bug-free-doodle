@@ -1,33 +1,36 @@
 {
-	"name": "Rails 8.1 Template",
-	"image": "mcr.microsoft.com/devcontainers/ruby:3.3",
-	"hostRequirements": {
-		"cpus": 4,
-		"memory": "16gb"
-	},
-	"postCreateCommand": "bundle install && bin/rails db:prepare",
-	"waitFor": "postCreateCommand",
-	"postAttachCommand": {
-		"server": "rails server"
-	},
-	"customizations": {
-		// "codespaces": {
-		// 	"openFiles": [
-		// 		"app/views/hello/index.html.erb"
-		// 	]
-		// },
-		"vscode": {
-			"extensions": [
-				"Shopify.ruby-lsp",
-				"oderwat.indent-rainbow"
-			]
-		}
-	},
-	"portsAttributes": {
-		"3000": {
-			"label": "Application",
-			"onAutoForward": "openPreview"
-		}
-	},
-	"forwardPorts": [3000]
+  "name": "Rails 8.1 Template",
+  "image": "mcr.microsoft.com/devcontainers/ruby:3.4",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "16gb"
+  },
+  "features": {
+    // Install activestorage dependencies to be able to upload files.
+    "ghcr.io/rails/devcontainer/features/activestorage": {},
+    // Install sqlite3 dependencies
+    "ghcr.io/rails/devcontainer/features/sqlite3": {}
+  },
+  "onCreateCommand": [
+    "bash",
+    "-c",
+    "echo 'eval \"$(rbenv init - bash)\"' >> ~/.bashrc"
+  ],
+  "waitFor": "postCreateCommand",
+  "postCreateCommand": "bin/setup --skip-server",
+  "postAttachCommand": {
+    "server": "bin/rails server"
+  },
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["Shopify.ruby-lsp", "oderwat.indent-rainbow"]
+    }
+  }
 }
